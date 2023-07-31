@@ -1,0 +1,113 @@
+-- MySQL dump 10.13  Distrib 8.0.24, for macos11 (x86_64)
+--
+-- Host: 192.168.1.32    Database: sqltest
+-- ------------------------------------------------------
+-- Server version	8.0.33
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `DIEMTHI`
+--
+
+DROP TABLE IF EXISTS `DIEMTHI`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `DIEMTHI` (
+  `MAMONHOC` int NOT NULL,
+  `MASV` int NOT NULL,
+  `DIEMLAN1` float DEFAULT NULL,
+  `DIEMLAN2` float DEFAULT NULL,
+  PRIMARY KEY (`MAMONHOC`,`MASV`),
+  KEY `monhoc_diemthi_idx` (`MAMONHOC`),
+  KEY `sinhvien_diemthi_idx` (`MASV`),
+  CONSTRAINT `monhoc_diemthi` FOREIGN KEY (`MAMONHOC`) REFERENCES `MONHOC` (`MAMONHOC`),
+  CONSTRAINT `sinhvien_diemthi` FOREIGN KEY (`MASV`) REFERENCES `SINHVIEN` (`MASV`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `DIEMTHI`
+--
+
+LOCK TABLES `DIEMTHI` WRITE;
+/*!40000 ALTER TABLE `DIEMTHI` DISABLE KEYS */;
+INSERT INTO `DIEMTHI` VALUES (1,1,7.5,NULL),(1,2,6.6,NULL),(1,3,8.6,NULL),(2,1,7,NULL),(2,2,6.3,NULL),(2,3,8.6,NULL),(3,1,6.9,NULL),(3,2,8.7,NULL),(3,3,9.5,NULL);
+/*!40000 ALTER TABLE `DIEMTHI` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MONHOC`
+--
+
+DROP TABLE IF EXISTS `MONHOC`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `MONHOC` (
+  `MAMONHOC` int NOT NULL,
+  `TENMONHOC` varchar(45) NOT NULL,
+  `SODVHT` varchar(45) NOT NULL,
+  PRIMARY KEY (`MAMONHOC`),
+  UNIQUE KEY `MAMONHOC_UNIQUE` (`MAMONHOC`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MONHOC`
+--
+
+LOCK TABLES `MONHOC` WRITE;
+/*!40000 ALTER TABLE `MONHOC` DISABLE KEYS */;
+INSERT INTO `MONHOC` VALUES (1,'Lịch Sử','3'),(2,'Toán','3'),(3,'Tiếng Anh','2');
+/*!40000 ALTER TABLE `MONHOC` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `SINHVIEN`
+--
+
+DROP TABLE IF EXISTS `SINHVIEN`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `SINHVIEN` (
+  `MASV` int NOT NULL,
+  `HODEM` varchar(45) NOT NULL,
+  `TEN` varchar(45) NOT NULL,
+  `NGAYSINH` date DEFAULT NULL,
+  `GIOITINH` double DEFAULT NULL,
+  `NOISINH` varchar(45) DEFAULT NULL,
+  `MALOP` varchar(45) NOT NULL,
+  PRIMARY KEY (`MASV`),
+  UNIQUE KEY `id_UNIQUE` (`MASV`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `SINHVIEN`
+--
+
+LOCK TABLES `SINHVIEN` WRITE;
+/*!40000 ALTER TABLE `SINHVIEN` DISABLE KEYS */;
+INSERT INTO `SINHVIEN` VALUES (1,'Nguyễn Hồng','Quân','2000-12-06',1,'Hà Nội','C001'),(2,'Phan Như','Khánh','1999-02-01',2,'Quảng Bình','C001'),(3,'Phạm Thị','Hoa','2003-04-22',2,'Hà Nội','C012');
+/*!40000 ALTER TABLE `SINHVIEN` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-07-31 11:12:22
